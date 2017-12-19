@@ -1,0 +1,23 @@
+{
+  "name": "healthcare",
+  "version": "1.0.0",
+  "description": "health care provider management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "restify": "4.1.1",
+    "save": "2.3.0"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tejal1386/healthCareProvider.git"
+  },
+  "author": "Tejal Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tejal1386/healthCareProvider/issues"
+  },
+  "homepage": "https://github.com/Tejal1386/healthCareProvider#readme"
+}
