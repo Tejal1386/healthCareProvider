@@ -1,7 +1,7 @@
 
 var SERVER_NAME = 'HealthCare-api'
 var PORT = process.env.PORT;
-var HOST = '127.0.0.1';
+
 
 
 var restify = require('restify')
@@ -13,8 +13,7 @@ var restify = require('restify')
   // Create the restify server
   , server = restify.createServer({ name: SERVER_NAME})
 
-  server.listen(PORT, HOST, function () {
-  console.log("Server is listening on: " + HOST + " Port: " + PORT);
+  server.listen(PORT, function () {
   console.log("End Points :");
  
   console.log('Resources:')
