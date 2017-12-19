@@ -14,12 +14,9 @@ var restify = require('restify')
   , server = restify.createServer({ name: SERVER_NAME})
 
   server.listen(PORT, HOST, function () {
-  //console.log('Server %s listening at %s', server.name, server.url)
   console.log("Server is listening on: " + HOST + " Port: " + PORT);
   console.log("End Points :");
-  //console.log( HOST + ":" + PORT +"/patients   method: GET");
-  //console.log( HOST + ":" + PORT +"/patients   method: POST");
-  
+ 
   console.log('Resources:')
   console.log(' /patients')
   console.log(' /patients/:id')  
