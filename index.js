@@ -1,6 +1,6 @@
 
 var SERVER_NAME = 'HealthCare-api'
-var PORT = 3000;
+var PORT = process.env.PORT;
 var HOST = '127.0.0.1';
 
 
