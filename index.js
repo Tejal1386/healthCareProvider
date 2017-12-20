@@ -137,7 +137,7 @@ server.post('/patients/:id/records', function (req, res, next) {
 server.get('/patients/:id/records', function (req, res, next) {
         
         // Find every entity within the given collection
-        Patient_recordsSave.find({_id: req.params.patient_id}, function (error, Patient_records) {
+        Patient_recordsSave.find({patient_id: req.params.id}, function (error, Patient_records) {
   
         // If there are any errors, pass them to next in the correct format
         if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
