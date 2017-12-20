@@ -184,8 +184,15 @@ server.get('/patients/:id/records', function (req, res, next) {
             patient_id: req.params.patient_id, 
             date: req.params.date, 
             nurse_name: req.params.nurse_name,
-            category: req.params.category,
-            readings:req.params.readings
+            readings:{
+              reading1: req.params.reading1,
+              reading2: req.params.reading2,
+              reading3: req.params.reading3,
+              reading4: req.params.reading4,
+              reading5: req.params.reading5
+            },
+            category: req.params.category
+           
           }
 
 
@@ -211,13 +218,18 @@ server.put('/patients/:id', function (req, res, next) {
    // Creating new patient.
     var newPatient = {
        _id:req.params.id,
-        first_name: req.params.first_name,
-        last_name: req.params.last_name,
-        address: req.params.address,
-        date_of_birth: req.params.date_of_birth,
-        department: req.params.department,
-        doctor: req.params.doctor
-    }
+       first_name: req.params.first_name,
+       last_name: req.params.last_name,
+       address: req.params.address,
+       city: req.params.city,
+       state:req.params.state,
+       zip_code: req.params.zip_code,
+       date_of_birth: req.params.date_of_birth,
+       email: req.params.email,
+       home_phone: req.params.home_Phone,
+       cell_phone: req.params.cell_phone,
+       department: req.params.department,
+       doctor: req.params.doctor }
    
      // Update the patient with the persistence engine
      PatientsSave.update(newPatient, function (error, Patient) {
