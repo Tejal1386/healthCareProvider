@@ -285,7 +285,7 @@ server.del('/patients/:id/records', function (req, res, next) {
   
   
       // Delete the patient with the persistence engine
-    PatientsSave.delete({patient_id: req.params.id}, function (error, Patient) {
+      Patient_recordsSave.delete({patient_id: req.params.id}, function (error, Patient) {
   
       // If there are any errors, pass them to next in the correct format
       if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
