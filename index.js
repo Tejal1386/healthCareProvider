@@ -92,14 +92,15 @@ server.post('/patients/:id/records', function (req, res, next) {
             patient_id: req.params.patient_id, 
             date: req.params.date, 
             nurse_name: req.params.nurse_name,
-            readings:{
-              reading1: req.params.reading1,
-              reading2: req.params.reading2,
-              reading3: req.params.reading3,
-              reading4: req.params.reading4,
-              reading5: req.params.reading5
-            },
-            category: req.params.category
+            category: req.params.category,
+            reading1:req.params.reading1,
+            reading2:req.params.reading2,
+            food_allergy: req.params.food_allergy,
+            bp: req.params.bp,
+            diabetic: req.params.diabetic,
+            heart_disease: req.params.heart_disease,
+            surgery: req.params.surgery,
+            accident: req.params.accident
            
           }
     
@@ -184,15 +185,15 @@ server.get('/patients/:id/records', function (req, res, next) {
             patient_id: req.params.patient_id, 
             date: req.params.date, 
             nurse_name: req.params.nurse_name,
-            readings:{
-              reading1: req.params.reading1,
-              reading2: req.params.reading2,
-              reading3: req.params.reading3,
-              reading4: req.params.reading4,
-              reading5: req.params.reading5
-            },
-            category: req.params.category
-           
+            category: req.params.category,
+            reading1:req.params.reading1,
+            reading2:req.params.reading2,
+            food_allergy: req.params.food_allergy,
+            bp: req.params.bp,
+            diabetic: req.params.diabetic,
+            heart_disease: req.params.heart_disease,
+            surgery: req.params.surgery,
+            accident: req.params.accident
           }
 
 
