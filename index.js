@@ -2,6 +2,7 @@
 var SERVER_NAME = 'HealthCare-api'
 var PORT = process.env.PORT;
 //var HOST = "127.0.0.1";
+//var PORT = 3000;
 
 
 
@@ -145,6 +146,22 @@ server.get('/patients/:id/records', function (req, res, next) {
         
         res.send(Patient_records);
         })
+})
+
+//------------------------------------------------------------------------------//
+                      // Get  Patient records by id in the system
+//------------------------------------------------------------------------------//
+
+server.get('/patients/:pid/records/:id', function (req, res, next) {
+        
+  // Find every entity within the given collection
+  Patient_recordsSave.find({patient_id: req.params.pid, _id:req.params.id}, function (error, Patient_records) {
+
+  // If there are any errors, pass them to next in the correct format
+  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+  
+  res.send(Patient_records);
+  })
 })
 
 //------------------------------------------------------------------------------//
