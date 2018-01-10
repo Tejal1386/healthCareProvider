@@ -9,6 +9,7 @@ var PORT = process.env.PORT;
 var restify = require('restify')
 
   // Get a persistence engine for the patients
+  , UsersSave = require('save')('Users')
   , PatientsSave = require('save')('Patients')
   , Patient_recordsSave = require('save')('Patient_records')
   
@@ -31,6 +32,74 @@ server
 
 // Maps req.body to req.params so there is no switching between them
 .use(restify.bodyParser())
+
+
+
+
+//------------------------------------------------------------------------------//
+                       // Create a new User 
+//------------------------------------------------------------------------------//
+server.post('/users', function (req, res, next) {
+  
+  // Make sure first_name and last_name is defined
+  if (req.params.first_name === undefined) {
+    // If there are any errors, pass them to next in the correct format
+    return next(new restify.InvalidArgumentError('first_name must be supplied'))
+}
+ if (req.params.last_name === undefined) {
+  // If there are any errors, pass them to next in the correct format
+  return next(new restify.InvalidArgumentError('last_name must be supplied'))
+}
+
+
+// Creating new patient.
+ var newuser = {
+    first_name: req.params.first_name,
+    last_name: req.params.last_name,
+    display_name: req.params.display_name,
+    email: req.params.email,
+    password: req.params.password
+  }
+
+// Create the patient using the persistence engine
+UsersSave.create( newuser, function (error, user) {
+
+  // If there are any errors, pass them to next in the correct format
+  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+  // Send the patient if no issues
+  res.send(201, user)
+})
+})
+
+
+
+
+//------------------------------------------------------------------------------//
+                  // Get a single user by their user id
+//------------------------------------------------------------------------------//
+
+  server.get('/users/:id', function (req, res, next) {
+
+    // Find a single patient by their id within save
+    UsersSave.findOne({ _id: req.params.id }, function (error, users) {
+
+      
+    // If there are any errors, pass them to next in the correct format
+    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+    if (users) {
+      // Send the patient if no issues
+      res.send(users)
+    } else {
+      // Send 404 header if the patient doesn't exist
+      res.send(404)
+    }
+  })
+})
+
+
+
 
 
 //------------------------------------------------------------------------------//
