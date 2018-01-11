@@ -75,6 +75,28 @@ UsersSave.create( newuser, function (error, user) {
 
 
 
+
+
+
+//------------------------------------------------------------------------------//
+                  // Get all users
+//------------------------------------------------------------------------------//
+
+
+
+server.get('/users', function (req, res, next) {
+     
+  // Find every entity within the given collection
+  UsersSave.find({}, function (error, users) {
+  // If there are any errors, pass them to next in the correct format
+  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+   res.send(users);
+ })
+})
+
+
+
 //------------------------------------------------------------------------------//
                   // Get a single user by their user id
 //------------------------------------------------------------------------------//
