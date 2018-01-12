@@ -10,7 +10,7 @@ var restify = require('restify')
 
   // Get a persistence engine for the patients
   , UsersSave = require('save')('Users')
-  , NewsSave = require('news')('news')
+  , NewsSave = require('save')('news')
   , PatientsSave = require('save')('Patients')
   , Patient_recordsSave = require('save')('Patient_records')
   
