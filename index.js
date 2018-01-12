@@ -10,6 +10,7 @@ var restify = require('restify')
 
   // Get a persistence engine for the patients
   , UsersSave = require('save')('Users')
+  , NewsSave = require('news')('news')
   , PatientsSave = require('save')('Patients')
   , Patient_recordsSave = require('save')('Patient_records')
   
@@ -35,6 +36,56 @@ server
 
 
 
+//------------------------------------------------------------------------------//
+                       // Create a NEWS
+//------------------------------------------------------------------------------//
+server.post('/news', function (req, res, next) {
+  
+  // Make sure first_name and last_name is defined
+  if (req.params.title === undefined) {
+    // If there are any errors, pass them to next in the correct format
+    return next(new restify.InvalidArgumentError('title must be supplied'))
+}
+ if (req.params.detail === undefined) {
+  // If there are any errors, pass them to next in the correct format
+  return next(new restify.InvalidArgumentError('detail must be supplied'))
+}
+
+
+// Creating new patient.
+ var newnews = {
+    title: req.params.title,
+    detail: req.params.detail,
+    
+  }
+
+// Create the patient using the persistence engine
+    NewsSave.create( newnews, function (error, news) {
+
+  // If there are any errors, pass them to next in the correct format
+  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+  // Send the patient if no issues
+  res.send(201, news)
+})
+})
+
+//------------------------------------------------------------------------------//
+                  // Get all News
+//------------------------------------------------------------------------------//
+
+
+
+server.get('/news', function (req, res, next) {
+     
+  // Find every entity within the given collection
+  NewsSave.find({}, function (error, news) {
+  // If there are any errors, pass them to next in the correct format
+  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+   res.send(news);
+ })
+})
 
 //------------------------------------------------------------------------------//
                        // Create a new User 
@@ -71,12 +122,6 @@ UsersSave.create( newuser, function (error, user) {
   res.send(201, user)
 })
 })
-
-
-
-
-
-
 
 //------------------------------------------------------------------------------//
                   // Get all users
@@ -351,6 +396,23 @@ server.put('/patients/:id', function (req, res, next) {
      
    })
  })
+
+ //------------------------------------------------------------------------------//
+                       // Delete news  with the given id
+//------------------------------------------------------------------------------//
+
+server.del('/news/:id', function (req, res, next) {
+  
+  // Delete the patient with the persistence engine
+  NewsSave.delete(req.params.id, function (error, news) {
+
+    // If there are any errors, pass them to next in the correct format
+    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+    // Send a 200 OK response
+    res.send(200)
+  })
+})
 
 //------------------------------------------------------------------------------//
                        // Delete Patient  with the given id
